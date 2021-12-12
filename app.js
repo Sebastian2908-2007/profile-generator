@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const generatePersonal = require('./src/personal-profile');
+const {writePersonal} = require('./utils/generate-personal');
 
 
 // ask user which type profile they want to do
@@ -73,89 +75,20 @@ const personalProfile = () => {
   ]).then(profileQuestions => {
       // checking to see if user wants to make a dating profile if so run `dateProfile()`
       if(profileQuestions.confirmDateProfile) {
-          dateProfile(profileQuestions);
+         return dateProfile(profileQuestions);
+      }else {
+         return generatePersonal(profileQuestions)
       }
-  })
+  }).then(pagehtml => {
+      console.log(pagehtml);
+    return writePersonal(pagehtml);
+ }).catch(err => {
+    console.log(err);
+});
 };
 
-const businessProfile = () => {
-   return inquirer.prompt([
-      { 
-           type:'checkbox',
-           name: 'businessType',
-           message:'What kind of business is this?',
-           choices:['tech','food service', 'entertainment','building/construction','manafacturing','internet sales','physical sales']
-      },
-      {
-          type:'input',
-          name:'businessActions',
-          message: 'in some words describe what your business does',
-          validate: actions => {
-              if(!actions) {
-                  console.log('You gotta let people know what you do! Try again');
-                  return false;
-              }else {
-                  return true;
-              }
-          }
-      },
-      {
-          type:'input',
-          name:'busBenifits',
-          message: 'in some words describe how your business can benifit a customer today',
-          validate: benifits => {
-              if(!benifits) {
-                  console.log('you gotta tell people the benifts to make a sell! try again');
-                  return false;
-              }else{
-                  return true;
-              }
-          }
-      },
-      {
-          type:'input',
-          name:'email',
-          message:'what is your company email?',
-          validate: email => {
-            if(!email) {
-                console.log('you gotta tell people your email try again');
-                return false;
-            }else{
-                return true;
-            }
-        }
-      },
-      {
-          type:'input',
-          name:'phone',
-          message:'what is your company phone number?',
-          validate: phone => {
-            if(!phone) {
-                console.log('you gotta tell people your phone number try again');
-                return false;
-            }else{
-                return true;
-            }
-        } 
-      },
-      {
-          type:'input',
-          name:'website',
-          message: 'what is your company website?',
-          validate: website => {
-            if(!website) {
-                console.log('you gotta tell people your website try again');
-                return false;
-            }else{
-                return true;
-            }
-        }
-      }
-   ]).then(businessInfo => {
-       console.log(businessInfo);
-   })
-};
 
+// this runs when user decides to add a dating profile
 const dateProfile = personalInfo => {
     personalInfo.dating = [];
      console.log(`
@@ -206,9 +139,94 @@ const dateProfile = personalInfo => {
 
         ]).then(datingData => {
             personalInfo.dating.push(datingData)
-            console.log(personalInfo.dating[0].bodyPref);
-        })
+          return  generatePersonal(personalInfo);
+        }).then(pagehtml => {
+            console.log(pagehtml);
+            return writePersonal(pagehtml);
+         }).catch(err => {
+             console.log(err);
+         })
      
 };
+
+// this runs when user wants to create a business profile
+const businessProfile = () => {
+    return inquirer.prompt([
+       { 
+            type:'checkbox',
+            name: 'businessType',
+            message:'What kind of business is this?',
+            choices:['tech','food service', 'entertainment','building/construction','manafacturing','internet sales','physical sales']
+       },
+       {
+           type:'input',
+           name:'businessActions',
+           message: 'in some words describe what your business does',
+           validate: actions => {
+               if(!actions) {
+                   console.log('You gotta let people know what you do! Try again');
+                   return false;
+               }else {
+                   return true;
+               }
+           }
+       },
+       {
+           type:'input',
+           name:'busBenifits',
+           message: 'in some words describe how your business can benifit a customer today',
+           validate: benifits => {
+               if(!benifits) {
+                   console.log('you gotta tell people the benifts to make a sell! try again');
+                   return false;
+               }else{
+                   return true;
+               }
+           }
+       },
+       {
+           type:'input',
+           name:'email',
+           message:'what is your company email?',
+           validate: email => {
+             if(!email) {
+                 console.log('you gotta tell people your email try again');
+                 return false;
+             }else{
+                 return true;
+             }
+         }
+       },
+       {
+           type:'input',
+           name:'phone',
+           message:'what is your company phone number?',
+           validate: phone => {
+             if(!phone) {
+                 console.log('you gotta tell people your phone number try again');
+                 return false;
+             }else{
+                 return true;
+             }
+         } 
+       },
+       {
+           type:'input',
+           name:'website',
+           message: 'what is your company website?',
+           validate: website => {
+             if(!website) {
+                 console.log('you gotta tell people your website try again');
+                 return false;
+             }else{
+                 return true;
+             }
+         }
+       }
+    ]).then(businessInfo => {
+        console.log(businessInfo);
+    })
+ };
+ 
 
 profileType()
