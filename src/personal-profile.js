@@ -13,5 +13,6 @@ module.exports = personalTemplate => {
     </head>
     <body>
     <div>${personalTemplate.personalSummary}</div>
-    </body>`;
+    </body>
+    </html>`;
 };

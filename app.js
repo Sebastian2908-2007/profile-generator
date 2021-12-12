@@ -75,14 +75,20 @@ const personalProfile = () => {
   ]).then(profileQuestions => {
       // checking to see if user wants to make a dating profile if so run `dateProfile()`
       if(profileQuestions.confirmDateProfile) {
-         return dateProfile(profileQuestions);
+        throw  dateProfile(profileQuestions);
+        
+        
       }else {
          return generatePersonal(profileQuestions)
       }
   }).then(pagehtml => {
-      console.log(pagehtml);
+      console.log('helo');
     return writePersonal(pagehtml);
- }).catch(err => {
+ }).then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return;
+})
+ .catch(err => {
     console.log(err);
 });
 };
@@ -94,6 +100,7 @@ const dateProfile = personalInfo => {
      console.log(`
      ================================
      make your dating profile!
+     (ignore <pending> on first question and just type your response:)
      ==================================
      ===================================
      `);
@@ -141,9 +148,14 @@ const dateProfile = personalInfo => {
             personalInfo.dating.push(datingData)
           return  generatePersonal(personalInfo);
         }).then(pagehtml => {
-            console.log(pagehtml);
+            console.log('helocopter');
+            //console.log(pagehtml);
             return writePersonal(pagehtml);
-         }).catch(err => {
+         }).then(writeFileResponse => {
+            console.log(writeFileResponse);
+            return;
+        })
+         .catch(err => {
              console.log(err);
          })
      
