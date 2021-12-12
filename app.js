@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
 
+
+// ask user which type profile they want to do
 const profileType = () => {
     return inquirer.prompt([
         {
@@ -27,6 +29,7 @@ const profileType = () => {
     });
 };
 
+// questions for personal profile
 const personalProfile = () => {
   return inquirer.prompt([
       {
@@ -61,13 +64,77 @@ const personalProfile = () => {
           message: 'which music do you like best?',
           choices:['country', 'hip hop','pop','alternative','grunge','metal']
       },
+      {
+          type:'confirm',
+          name: 'confirmDateProfile',
+          message: 'if you are single, would you like to create a dating profile?',
+          default: true
+      }
   ]).then(profileQuestions => {
-      console.log(profileQuestions);
+      // checking to see if user wants to make a dating profile if so run `dateProfile()`
+      if(profileQuestions.confirmDateProfile) {
+          dateProfile(profileQuestions);
+      }
   })
 };
 
 const businessProfile = () => {
     console.log('business profile chosen')
+};
+
+const dateProfile = personalInfo => {
+    personalInfo.dating = [];
+     console.log(`
+     ================================
+     make your dating profile!
+     ==================================
+     ===================================
+     `);
+     return inquirer.prompt([ 
+         {
+             type: 'input',
+             name: 'intrestSummary',
+             message: 'in some words describe what you are looking for in a mate'
+         },
+         {
+             type: 'input',
+             name:'describeYourself',
+             message:'in some words describe the benifits of dating you.'
+         },
+         {
+             type: 'checkbox',
+             name:'mOrF',
+             message: 'are you female or male or is it more complex?',
+             choices:['straight female', 'straight male','gay man','gay female','trans man','trans female','non binary']
+         },
+         {
+             type: 'input',
+             name:'heightPref',
+             message: 'Do you have any height preferences for a partner? If so please do share'
+         },
+         {
+             type: 'checkbox',
+             name: 'bodyPref',
+             message: 'which body type do you like check all that apply',
+             choices:['athletic','petite','a little extra','average','dont care']
+         },
+         {
+             type: 'input',
+             name: 'hairPref',
+             message: 'Is there a certain hair color you prefer? if so write it down'
+         },
+         {
+             type:'checkbox',
+             name:'eyePref',
+             message:'What eye color do you prefer in a partner?',
+             choices:['blue','brown','green','hazell','dont care']
+         }
+
+        ]).then(datingData => {
+            personalInfo.dating.push(datingData)
+            console.log(personalInfo.dating[0].bodyPref);
+        })
+     
 };
 
 profileType()
