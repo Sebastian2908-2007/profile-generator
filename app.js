@@ -79,7 +79,81 @@ const personalProfile = () => {
 };
 
 const businessProfile = () => {
-    console.log('business profile chosen')
+   return inquirer.prompt([
+      { 
+           type:'checkbox',
+           name: 'businessType',
+           message:'What kind of business is this?',
+           choices:['tech','food service', 'entertainment','building/construction','manafacturing','internet sales','physical sales']
+      },
+      {
+          type:'input',
+          name:'businessActions',
+          message: 'in some words describe what your business does',
+          validate: actions => {
+              if(!actions) {
+                  console.log('You gotta let people know what you do! Try again');
+                  return false;
+              }else {
+                  return true;
+              }
+          }
+      },
+      {
+          type:'input',
+          name:'busBenifits',
+          message: 'in some words describe how your business can benifit a customer today',
+          validate: benifits => {
+              if(!benifits) {
+                  console.log('you gotta tell people the benifts to make a sell! try again');
+                  return false;
+              }else{
+                  return true;
+              }
+          }
+      },
+      {
+          type:'input',
+          name:'email',
+          message:'what is your company email?',
+          validate: email => {
+            if(!email) {
+                console.log('you gotta tell people your email try again');
+                return false;
+            }else{
+                return true;
+            }
+        }
+      },
+      {
+          type:'input',
+          name:'phone',
+          message:'what is your company phone number?',
+          validate: phone => {
+            if(!phone) {
+                console.log('you gotta tell people your phone number try again');
+                return false;
+            }else{
+                return true;
+            }
+        } 
+      },
+      {
+          type:'input',
+          name:'website',
+          message: 'what is your company website?',
+          validate: website => {
+            if(!website) {
+                console.log('you gotta tell people your website try again');
+                return false;
+            }else{
+                return true;
+            }
+        }
+      }
+   ]).then(businessInfo => {
+       console.log(businessInfo);
+   })
 };
 
 const dateProfile = personalInfo => {
