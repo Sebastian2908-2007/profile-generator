@@ -158,7 +158,7 @@ const dateProfile = personalInfo => {
 
         ]).then(datingData => {
             personalInfo.dating.push(datingData)
-            console.log(personalInfo);
+            //console.log(personalInfo);
           return  generatePersonal(personalInfo);
         }).then(pagehtml => {
             

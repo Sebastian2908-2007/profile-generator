@@ -20,15 +20,24 @@ const generateProfileHtml = personalInfo => {
 }
 
 const generateDatingProfile = dating => {
+  console.log(dating);
 return `
- <div>${dating[0].intrestSummary}</div>
+ ${dating
+.map(({intrestSummary}) => {
+  return ` 
+  <div>${intrestSummary}</div>
+  `;
+})
+}
 `;
 };
 
 // checks to see if they want to add a dating profile if so run`generateDatingProfile()`
 const checkIfDatingProfile = (personalInfo, datingInfo) => {
+  //console.log(personalInfo);
+ // console.log(datingInfo);
   if(personalInfo.confirmDateProfile) {
-     generateDatingProfile(datingInfo);
+    return generateDatingProfile(datingInfo);
   }
   else{
     return false;
