@@ -5,16 +5,16 @@ const generateProfileHtml = personalInfo => {
   <div class="container flex-row justify-space-between align-center py-3">
     <h1 class="page-title text-secondary bg-dark py-2 px-3">${personalInfo.name}</h1>
     <nav class="flex-row">
-    <p >${personalInfo.personalSummary}</p>
+    <p class='text-secondary bg-dark'>Brief Me Summary: ${personalInfo.personalSummary}</p>
       </nav>
   </div>
  </header>
  
  <section class="my-3" id="about">
- <h2 class="text-dark bg-primary p-2 display-inline-block">My Intests</h2>
- <div>My Hobbies Include: ${personalInfo.hobbies}</div>
- <div>My Favorite Foods Are: ${personalInfo.favFoods}</div>
- <div>My Favorite Types of Music: ${personalInfo.favMusic}</div>
+ <h2 class="text-dark bg-primary p-2 display-inline-block">My Intrests</h2>
+ <div class='bg-primary text dark'>My Hobbies Include: ${personalInfo.hobbies}</div>
+ <div class='bg-primary text dark'>My Favorite Foods Are: ${personalInfo.favFoods}</div>
+ <div class='bg-primary text dark'>My Favorite Types of Music: ${personalInfo.favMusic}</div>
 </section>
   `;
 }
@@ -25,13 +25,17 @@ return `
  ${dating
 .map(({intrestSummary,describeYourself,mOrF,heightPref,bodyPref,hairPref,eyePref}) => {
   return ` 
-  <div>${intrestSummary}</div>
-  <div>${describeYourself}</div>
-  <div>${mOrF}</div>
-  <div>${heightPref}</div>
-  <div>${bodyPref}</div>
-  <div>${hairPref}</div>
-  <div>${eyePref}</div>
+  <section class='my-3' id='portfolio'>
+  <div class='flex-row justify-space-between'>
+  <div class='col-12 mb-2 bg-dark text-light p-3'>What i'm looking for: ${intrestSummary}</div>
+  <div  class='col-12 mb-2 bg-dark text-light p-3'>A bit about why i'm great for you: ${describeYourself}</div>
+  <div  class='col-12 mb-2 bg-dark text-light p-3'>I am: ${mOrF}</div>
+  <div class='col-12 mb-2 bg-dark text-light p-3'>My prefered Height: ${heightPref}</div>
+  <div class='col-12 mb-2 bg-dark text-light p-3' >Body type I prefer: ${bodyPref}</div>
+  <div class='col-12 mb-2 bg-dark text-light p-3'>Favorite hair Color: ${hairPref}</div>
+  <div class='col-12 mb-2 bg-dark text-light p-3' >Eye's I really like: ${eyePref}</div>
+  </div>
+  </section>
   
   `;
 })

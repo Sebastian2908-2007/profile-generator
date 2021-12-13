@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const generatePersonal = require('./src/personal-profile');
-const {writePersonal} = require('./utils/generate-personal');
+const {writePersonal, copyPersonalCss} = require('./utils/generate-personal');
 
 const dummyData = {
     name: 'Sebastian',
@@ -186,7 +186,9 @@ const dateProfile = personalInfo => {
             return writePersonal(pagehtml);
          }).then(writeFileResponse => {
             console.log(writeFileResponse);
-            return;
+            return copyPersonalCss();
+        }).then(copyResponse => {
+            console.log(copyResponse);
         })
          .catch(err => {
              console.log(err);

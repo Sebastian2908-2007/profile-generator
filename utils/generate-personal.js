@@ -16,4 +16,19 @@ return new Promise((resolve, reject) => {
  });
 };
 
-module.exports = {writePersonal};
+const copyPersonalCss = () => {
+    return new Promise((resolve, reject) => {
+        fs.copyFile('./src/style.css', './dist/style.css', err => {
+            if(err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'style sheet copied!'
+            })
+        })
+    })
+};
+
+module.exports = {writePersonal, copyPersonalCss};
