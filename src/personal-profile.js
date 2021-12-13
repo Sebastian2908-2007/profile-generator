@@ -1,8 +1,39 @@
+//makes html for just personal info
 const generateProfileHtml = personalInfo => {
   return ` 
-  <section>${personalInfo.favFoods}</section>
+  <header>
+  <div class="container flex-row justify-space-between align-center py-3">
+    <h1 class="page-title text-secondary bg-dark py-2 px-3">${personalInfo.name}</h1>
+    <nav class="flex-row">
+    <p >${personalInfo.personalSummary}</p>
+      </nav>
+  </div>
+ </header>
+ 
+ <section class="my-3" id="about">
+ <h2 class="text-dark bg-primary p-2 display-inline-block">My Intests</h2>
+ <div>My Hobbies Include: ${personalInfo.hobbies}</div>
+ <div>My Favorite Foods Are: ${personalInfo.favFoods}</div>
+ <div>My Favorite Types of Music: ${personalInfo.favMusic}</div>
+</section>
   `;
 }
+
+const generateDatingProfile = dating => {
+return `
+ <div>${dating[0].intrestSummary}</div>
+`;
+};
+
+// checks to see if they want to add a dating profile if so run`generateDatingProfile()`
+const checkIfDatingProfile = (personalInfo, datingInfo) => {
+  if(personalInfo.confirmDateProfile) {
+     generateDatingProfile(datingInfo);
+  }
+  else{
+    return false;
+  }
+};
 
 module.exports = personalTemplate => {
   const {dating, ...personal} = personalTemplate;
@@ -21,6 +52,7 @@ module.exports = personalTemplate => {
      <body>
       <main> 
     ${generateProfileHtml(personal)}
+    ${checkIfDatingProfile(personal, dating)}
       </main>
      </body>
     </html>`;
