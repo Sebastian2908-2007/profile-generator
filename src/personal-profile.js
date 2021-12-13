@@ -1,4 +1,11 @@
+const generateProfileHtml = personalInfo => {
+  return ` 
+  <section>${personalInfo.favFoods}</section>
+  `;
+}
+
 module.exports = personalTemplate => {
+  const {dating, ...personal} = personalTemplate;
     return` 
     <!DOCTYPE html>
     <html lang="en">
@@ -11,8 +18,10 @@ module.exports = personalTemplate => {
       <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-    <div>${personalTemplate.personalSummary}</div>
-    </body>
+     <body>
+      <main> 
+    ${generateProfileHtml(personal)}
+      </main>
+     </body>
     </html>`;
 };

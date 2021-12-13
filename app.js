@@ -35,6 +35,19 @@ const profileType = () => {
 const personalProfile = () => {
   return inquirer.prompt([
       {
+          type:'input',
+          name:'name',
+          message:'what is your name?',
+          validate: name => {
+              if(!name) {
+                  console.log('people want to know your name! Try again')
+                  return false;
+              }else{
+                  return true;
+              }
+          }
+      },
+      {
        type:'input',
        name: 'personalSummary',
        message: 'In some words describe whats cool about you',
@@ -82,7 +95,6 @@ const personalProfile = () => {
          return generatePersonal(profileQuestions)
       }
   }).then(pagehtml => {
-      console.log('helo');
     return writePersonal(pagehtml);
  }).then(writeFileResponse => {
     console.log(writeFileResponse);
@@ -100,7 +112,7 @@ const dateProfile = personalInfo => {
      console.log(`
      ================================
      make your dating profile!
-     (ignore <pending> on first question and just type your response:)
+     (ignore <pending> on first question and just start typing your response:)
      ==================================
      ===================================
      `);
@@ -146,9 +158,10 @@ const dateProfile = personalInfo => {
 
         ]).then(datingData => {
             personalInfo.dating.push(datingData)
+            console.log(personalInfo);
           return  generatePersonal(personalInfo);
         }).then(pagehtml => {
-            console.log('helocopter');
+            
             //console.log(pagehtml);
             return writePersonal(pagehtml);
          }).then(writeFileResponse => {
@@ -162,7 +175,7 @@ const dateProfile = personalInfo => {
 };
 
 // this runs when user wants to create a business profile
-const businessProfile = () => {
+/*const businessProfile = () => {
     return inquirer.prompt([
        { 
             type:'checkbox',
@@ -238,7 +251,7 @@ const businessProfile = () => {
     ]).then(businessInfo => {
         console.log(businessInfo);
     })
- };
+ };*/
  
 
 profileType()
