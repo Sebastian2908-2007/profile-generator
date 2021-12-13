@@ -2,6 +2,25 @@ const inquirer = require('inquirer');
 const generatePersonal = require('./src/personal-profile');
 const {writePersonal} = require('./utils/generate-personal');
 
+const dummyData = {
+    name: 'Sebastian',
+    personalSummary: 'I am a true cheesecake slayer',
+    hobbies:['working out','hunting', 'fishing', 'camping', 'hiking'],
+    favFoods: ['vegtables','meats','fruit'],
+    favMusic: ['country', 'hip hop','pop','alternative','grunge','metal'],
+    confirmDateProfile: true,
+    dating: [
+        {
+            intrestSummary: 'im looking for a coo chica',
+            describeYourself: 'i can really do stuff good good frfr',
+            mOrF:['straight male'],
+            heightPref:'below 5"7',
+            bodyPref:['athletic','petite','average'],
+            hairPref: 'red or blonde',
+            eyePref:['blue','green']
+        }
+    ]
+}
 
 // ask user which type profile they want to do
 const profileType = () => {
@@ -159,7 +178,8 @@ const dateProfile = personalInfo => {
         ]).then(datingData => {
             personalInfo.dating.push(datingData)
             //console.log(personalInfo);
-          return  generatePersonal(personalInfo);
+          //return  generatePersonal(personalInfo);
+          return  generatePersonal(dummyData);
         }).then(pagehtml => {
             
             //console.log(pagehtml);

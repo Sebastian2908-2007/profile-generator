@@ -23,9 +23,16 @@ const generateDatingProfile = dating => {
   console.log(dating);
 return `
  ${dating
-.map(({intrestSummary}) => {
+.map(({intrestSummary,describeYourself,mOrF,heightPref,bodyPref,hairPref,eyePref}) => {
   return ` 
   <div>${intrestSummary}</div>
+  <div>${describeYourself}</div>
+  <div>${mOrF}</div>
+  <div>${heightPref}</div>
+  <div>${bodyPref}</div>
+  <div>${hairPref}</div>
+  <div>${eyePref}</div>
+  
   `;
 })
 }
