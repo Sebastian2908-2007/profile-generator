@@ -4,34 +4,7 @@ const generateBusiness = require('./src/business-profile');
 const {writePersonal, copyPersonalCss} = require('./utils/generate-personal');
 const {writeBusiness,copyBusinessCss} = require('./utils/generate-business');
 
-/*const dummyData = {
-    name: 'Sebastian',
-    personalSummary: 'I am a true cheesecake slayer',
-    hobbies:['working out','hunting', 'fishing', 'camping', 'hiking'],
-    favFoods: ['vegtables','meats','fruit'],
-    favMusic: ['country', 'hip hop','pop','alternative','grunge','metal'],
-    confirmDateProfile: true,
-    dating: [
-        {
-            intrestSummary: 'im looking for a coo chica',
-            describeYourself: 'i can really do stuff good good frfr',
-            mOrF:['straight male'],
-            heightPref:'below 5"7',
-            bodyPref:['athletic','petite','average'],
-            hairPref: 'red or blonde',
-            eyePref:['blue','green']
-        }
-    ]
-}*/
 
-const dummyDataBusiness = {
-    businessType:['tech'],
-    businessActions: 'I rule the world through censorship and disinformation',
-    busBenifits: 'I can keep you safe from your own common sense',
-    email: 'lieEmpire@gmail.com',
-    phone:'6666-666-6666',
-    website:'https://github.com/Sebastian2908-2007/profile-generator'
-}
 
 // ask user which type profile they want to do
 const profileType = () => {
