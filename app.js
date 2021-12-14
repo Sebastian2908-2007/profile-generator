@@ -62,7 +62,7 @@ const profileType = () => {
 };
 
 // questions for personal profile
-/*const personalProfile = () => {
+const personalProfile = () => {
   return inquirer.prompt([
       {
           type:'input',
@@ -203,7 +203,7 @@ const dateProfile = personalInfo => {
              console.log(err);
          })
      
-};*/
+};
 
 // this runs when user wants to create a business profile
 const businessProfile = () => {
@@ -281,7 +281,7 @@ const businessProfile = () => {
        }
     ]).then(businessInfo => {
      // return  generateBusiness(businessInfo);
-     return generateBusiness(dummyDataBusiness);
+     return generateBusiness(businessInfo);
     })
     .then(businessHtml => {
         return writeBusiness(businessHtml);
