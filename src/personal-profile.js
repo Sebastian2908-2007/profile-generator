@@ -51,7 +51,7 @@ const checkIfDatingProfile = (personalInfo, datingInfo) => {
     return generateDatingProfile(datingInfo);
   }
   else{
-    return false;
+    return '';
   }
 };
 

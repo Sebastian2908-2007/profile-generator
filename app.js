@@ -1,8 +1,10 @@
 const inquirer = require('inquirer');
 const generatePersonal = require('./src/personal-profile');
+const generateBusiness = require('./src/business-profile');
 const {writePersonal, copyPersonalCss} = require('./utils/generate-personal');
+const {writeBusiness,copyBusinessCss} = require('./utils/generate-business');
 
-const dummyData = {
+/*const dummyData = {
     name: 'Sebastian',
     personalSummary: 'I am a true cheesecake slayer',
     hobbies:['working out','hunting', 'fishing', 'camping', 'hiking'],
@@ -20,6 +22,15 @@ const dummyData = {
             eyePref:['blue','green']
         }
     ]
+}*/
+
+const dummyDataBusiness = {
+    businessType:['tech'],
+    businessActions: 'I rule the world through censorship and disinformation',
+    busBenifits: 'I can keep you safe from your own common sense',
+    email: 'lieEmpire@gmail.com',
+    phone:'6666-666-6666',
+    website:'https://github.com/Sebastian2908-2007/profile-generator'
 }
 
 // ask user which type profile they want to do
@@ -45,13 +56,13 @@ const profileType = () => {
         }else if (choice.whatTypeProfile === 'business') {
             businessProfile()
         }else {
-            return false;
+            return  profileType();
         }
     });
 };
 
 // questions for personal profile
-const personalProfile = () => {
+/*const personalProfile = () => {
   return inquirer.prompt([
       {
           type:'input',
@@ -117,7 +128,9 @@ const personalProfile = () => {
     return writePersonal(pagehtml);
  }).then(writeFileResponse => {
     console.log(writeFileResponse);
-    return;
+    return copyPersonalCss();
+}).then(cssResponse => {
+    console.log(cssResponse);
 })
  .catch(err => {
     console.log(err);
@@ -177,12 +190,8 @@ const dateProfile = personalInfo => {
 
         ]).then(datingData => {
             personalInfo.dating.push(datingData)
-            //console.log(personalInfo);
-          //return  generatePersonal(personalInfo);
-          return  generatePersonal(dummyData);
+           return  generatePersonal(personalInfo);
         }).then(pagehtml => {
-            
-            //console.log(pagehtml);
             return writePersonal(pagehtml);
          }).then(writeFileResponse => {
             console.log(writeFileResponse);
@@ -194,10 +203,10 @@ const dateProfile = personalInfo => {
              console.log(err);
          })
      
-};
+};*/
 
 // this runs when user wants to create a business profile
-/*const businessProfile = () => {
+const businessProfile = () => {
     return inquirer.prompt([
        { 
             type:'checkbox',
@@ -271,9 +280,23 @@ const dateProfile = personalInfo => {
          }
        }
     ]).then(businessInfo => {
-        console.log(businessInfo);
+     // return  generateBusiness(businessInfo);
+     return generateBusiness(dummyDataBusiness);
     })
- };*/
+    .then(businessHtml => {
+        return writeBusiness(businessHtml);
+    })
+    .then(writeResponse => {
+        console.log(writeResponse);
+        return copyBusinessCss();
+    })
+    .then(businessCssResponse => {
+        console.log(businessCssResponse);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+ };
  
 
 profileType()
